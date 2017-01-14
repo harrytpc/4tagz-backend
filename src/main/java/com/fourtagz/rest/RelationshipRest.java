@@ -23,7 +23,7 @@ public class RelationshipRest {
 	
 	/**
 	 * 
-	 * Create a new user
+	 * Create a new relationship
 	 * 
 	 * @param user object
 	 * @return user object with ID 
@@ -34,7 +34,12 @@ public class RelationshipRest {
 		return new ResponseEntity<Relationship>(r, HttpStatus.CREATED);
 	}
 	
-	@RequestMapping(value = "/delete/", method = RequestMethod.DELETE)
+	/***
+	 * deletes the relationship
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Relationship> delete(@PathVariable("id") long id) {
 				
         Relationship relationship = relationshipBO.findById(id);
