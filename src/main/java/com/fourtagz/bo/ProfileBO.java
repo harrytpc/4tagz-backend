@@ -18,5 +18,20 @@ public class ProfileBO {
 		List<Profile> profileList = profileRepository.example();
 		return profileList;
 	}
+	
+	public Profile insert(Profile profile){
+		profile = profileRepository.save(profile);
+		return profile;
+	}
+	
+	public Profile getDadosById(Long profileId){
+		Profile profile = profileRepository.findOne(profileId);
+		return profile;
+	}
+	
+	public Profile update(Profile profile){
+		profile = update(profile);		
+		return profile;
+	}
 
 }
