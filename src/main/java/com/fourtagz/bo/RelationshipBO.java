@@ -8,12 +8,13 @@ import org.springframework.stereotype.Service;
 import com.fourtagz.model.Relationship;
 import com.fourtagz.repository.RelationshipRepository;
 
+
 @Service
 public class RelationshipBO {
 	
 	@Autowired
-	RelationshipRepository relationshipRepository;
-	
+	private RelationshipRepository relationshipRepository;
+
 	/**
 	 * insert relationship
 	 * @param relationship
