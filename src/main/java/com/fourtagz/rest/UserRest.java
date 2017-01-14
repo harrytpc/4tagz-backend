@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fourtagz.bo.ProfileBO;
 import com.fourtagz.bo.UserBO;
 import com.fourtagz.model.User;
 
@@ -20,6 +21,9 @@ public class UserRest {
 
 	@Autowired
 	private UserBO userBO;
+	
+	@Autowired
+	private ProfileBO profileBO;
 	
 	/**
 	 * 
@@ -45,6 +49,7 @@ public class UserRest {
 	@RequestMapping(value = "/{userId}", method = RequestMethod.GET)
 	public ResponseEntity<User> getUser(@PathVariable("userId") Long userId) {
 		User user = userBO.getById(userId);
+		user.setProfile(profileBO.getById(userId));
 		return new ResponseEntity<User>(user, HttpStatus.OK);
 	}
 	

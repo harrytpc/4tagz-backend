@@ -2,12 +2,26 @@ package com.fourtagz.model;
 
 import java.util.Date;
 
-public class Relationship {
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
+@Entity
+public class Relationship {
+	
+	@Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
+	
 	private Date beepedDate;
-	private String local; // TODO veriricar melhor forma de armazenar localizacao
+	
+	@OneToOne(fetch = FetchType.EAGER)
 	private User user;
+	
+	@OneToOne(fetch = FetchType.EAGER)
 	private Profile beepedProfile;
 	
 	public Long getId() {
@@ -21,12 +35,6 @@ public class Relationship {
 	}
 	public void setBeepedDate(Date beepedDate) {
 		this.beepedDate = beepedDate;
-	}
-	public String getLocal() {
-		return local;
-	}
-	public void setLocal(String local) {
-		this.local = local;
 	}
 	public User getUser() {
 		return user;

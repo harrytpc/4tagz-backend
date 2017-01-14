@@ -1,11 +1,12 @@
 package com.fourtagz.model;
 
+import java.util.List;
+
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 
 
 @Entity
@@ -13,14 +14,12 @@ public class User {
 
 	@Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-	private Long id;
-	
+	private Long id;	
 	private String email;
 	private String password;
-//	private List<Profile> profileList;
 	
-	@ManyToOne(fetch = FetchType.EAGER)
-	private Profile profile;
+	@Transient
+	private List<Profile> profile;
 	
 	public Long getId() {
 		return id;
@@ -40,11 +39,12 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public Profile getProfile() {
+	public List<Profile> getProfile() {
 		return profile;
 	}
-	public void setProfile(Profile profile) {
+	public void setProfile(List<Profile> profile) {
 		this.profile = profile;
 	}
+	
 	
 }

@@ -1,9 +1,11 @@
 package com.fourtagz.model;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Profile {
@@ -13,14 +15,16 @@ public class Profile {
 	private Long id;
 	
 	private String name;
-//	private List<String> phoneList;
 	private String phone1;
 	private String phone2;
-	private String facebook;
+	private String email;
+	private String facebook;	
 	private String instagram;
 	private String linkedin;
-	
 	private String qrcode;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	private User user;
 
 	public Long getId() {
 		return id;
@@ -36,6 +40,14 @@ public class Profile {
 
 	public void setName(String name) {
 		this.name = name;
+	}	
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getFacebook() {
@@ -84,5 +96,13 @@ public class Profile {
 
 	public void setPhone2(String phone2) {
 		this.phone2 = phone2;
-	} 
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}	
 }
