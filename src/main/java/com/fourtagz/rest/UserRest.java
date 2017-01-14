@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fourtagz.bo.ProfileBO;
 import com.fourtagz.bo.UserBO;
+import com.fourtagz.model.Relationship;
 import com.fourtagz.model.User;
 
 @RestController
@@ -32,7 +33,7 @@ public class UserRest {
 	 * @param user object
 	 * @return user object with ID 
 	 */
-	@RequestMapping(method = RequestMethod.POST)
+	@RequestMapping(value = "/create/", method = RequestMethod.POST)
 	public ResponseEntity<User> create(@RequestBody User user) {
 		// TODO inserir usuario
 		User u = userBO.insert(user);
@@ -42,7 +43,18 @@ public class UserRest {
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public ResponseEntity<User> login(@RequestBody User user) {
 		// TODO validar se usuario e password estão OK
-		User u = new User();
+		User u = userBO.getById(user.getId());
+		
+		if(u == null){
+	    	System.out.println("User not found.");
+	    	return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
+		}
+		
+		if(!u.getPassword().equals(user.getPassword())){
+	    	System.out.println("Invalid password.");
+	    	return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
+		}
+		
 		return new ResponseEntity<User>(u, HttpStatus.CREATED);
 	}
 	
