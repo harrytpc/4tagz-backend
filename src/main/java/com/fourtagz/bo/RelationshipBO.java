@@ -15,15 +15,21 @@ public class RelationshipBO {
 	RelationshipRepository relationshipRepository;
 	
 	/**
-	 * 
-	 * insert user
-	 * 
-	 * @param user
+	 * insert relationship
+	 * @param relationship
 	 * @return
 	 */
 	public Relationship insert(Relationship relationship){
 		relationship = relationshipRepository.save(relationship);
 		return relationship;
+	}
+	
+	/***
+	 * delete relationship
+	 * @param id
+	 */
+	public void deleteById(Long id){
+		relationshipRepository.delete(id);
 	}
 	
 	public List<Relationship> example(){
@@ -34,6 +40,10 @@ public class RelationshipBO {
 	public List<Relationship> list(Long userId){
 		List<Relationship> userList = relationshipRepository.list(userId);
 		return userList;
+	}
+	public Relationship findById(Long id ){
+		Relationship relationship = relationshipRepository.findOne(id);
+		return relationship;
 	}
 
 }

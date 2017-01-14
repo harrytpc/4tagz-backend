@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fourtagz.bo.RelationshipBO;
-import com.fourtagz.model.Profile;
 import com.fourtagz.model.Relationship;
 
 @RestController
@@ -33,6 +32,21 @@ public class RelationshipRest {
 	public ResponseEntity<Relationship> create(@RequestBody Relationship relationship) {
 		Relationship r = relationshipBO.insert(relationship);
 		return new ResponseEntity<Relationship>(r, HttpStatus.CREATED);
+	}
+	
+	@RequestMapping(value = "/delete/", method = RequestMethod.DELETE)
+	public ResponseEntity<Relationship> delete(@PathVariable("id") long id) {
+				
+        Relationship relationship = relationshipBO.findById(id);
+        
+        if (relationship == null) {
+            System.out.println("Unable to delete. Relationship with id " + id + " not found");
+            return new ResponseEntity<Relationship>(HttpStatus.NOT_FOUND);
+        }
+ 
+        relationshipBO.deleteById(id);        
+        return new ResponseEntity<Relationship>(HttpStatus.NO_CONTENT);
+        
 	}
 
 	@RequestMapping(value = "/list/{userId}", method = RequestMethod.GET)
