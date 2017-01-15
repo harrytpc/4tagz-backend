@@ -22,7 +22,7 @@ public class ProfileRest {
 	@Autowired
 	private ProfileBO profileBO;
 	
-	@RequestMapping(value = "/{userId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/list/{userId}", method = RequestMethod.GET)
 	public ResponseEntity<List<Profile>> getUserProfiles(@PathVariable("userId") Long userId) {
 		List<Profile> profileList = profileBO.getById(userId);
 		return new ResponseEntity<List<Profile>>(profileList, HttpStatus.OK);		
@@ -38,7 +38,7 @@ public class ProfileRest {
 	}
 	
 	//Recupera dados do perfil
-	@RequestMapping(value = "{profileId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/unique/{profileId}", method = RequestMethod.GET)
 	public ResponseEntity<Profile> getUserProfile(@PathVariable("profileId") Long profileId){
 		
 		Profile profile = profileBO.getDadosById(profileId);
