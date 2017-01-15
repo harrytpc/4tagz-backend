@@ -1,6 +1,7 @@
 package com.fourtagz.rest;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fourtagz.bo.ProfileBO;
@@ -17,46 +19,41 @@ import com.fourtagz.model.Relationship;
 import com.fourtagz.model.User;
 
 @RestController
-@RequestMapping("profile")
+@RequestMapping("profiles")
 public class ProfileRest {
 	
 	@Autowired
-	private ProfileBO profileBO;
-	
-	@RequestMapping(value = "/list/{userId}", method = RequestMethod.GET)
-	public ResponseEntity<List<Profile>> getUserProfiles(@PathVariable("userId") Long userId) {
-		List<Profile> profileList = profileBO.getById(userId);
-		return new ResponseEntity<List<Profile>>(profileList, HttpStatus.OK);		
-		
-	}
+	private ProfileBO profileBO;	
 	
 	//Inserir Perfil de usuário
-	@RequestMapping(value = "/novoProfile", method = RequestMethod.POST)
-	public ResponseEntity<Profile> create(@RequestBody Profile profile) {
+	@RequestMapping(method = RequestMethod.POST)
+	public ResponseEntity<Profile> create(@RequestBody Profile profile) {		
 		
+		profile.setId(UUID.randomUUID().toString());
 		Profile p = profileBO.insert(profile);
 		return new ResponseEntity<Profile>(p, HttpStatus.CREATED);
 	}
 	
 	//Recupera dados do perfil
-	@RequestMapping(value = "/unique/{profileId}", method = RequestMethod.GET)
-	public ResponseEntity<Profile> getUserProfile(@PathVariable("profileId") Long profileId){
+	@RequestMapping(value = "/{profileId}", method = RequestMethod.GET)
+	public ResponseEntity<Profile> getUserProfile(@PathVariable("profileId") String profileId){
+		
 		
 		Profile profile = profileBO.getDadosById(profileId);
 		return new ResponseEntity<Profile>(profile, HttpStatus.OK);
 	}
 	
 	//Atualiza dados do perfil
-	@RequestMapping(value = "/updateProfile", method = RequestMethod.POST)
-	public ResponseEntity<Profile> update(@RequestBody Profile profile){
+	@RequestMapping(value = "/{profileId}", method = RequestMethod.PUT)
+	public ResponseEntity<Profile> updateProfile(@PathVariable("profileId") String profileId, @RequestBody Profile profile){
 		
 		Profile p = profileBO.update(profile);		
 		return new ResponseEntity<Profile>(p, HttpStatus.OK);				
 	}
 	
 	//Remove perfil
-	@RequestMapping(value = "deletePerfil/{profileId}", method = RequestMethod.DELETE)
-	public ResponseEntity<Profile> delete(@PathVariable("profileId") Long profileId){
+	@RequestMapping(value = "/{profileId}", method = RequestMethod.DELETE)
+	public ResponseEntity<Profile> delete(@PathVariable("profileId") String profileId){
 		
 		Profile profile = profileBO.getDadosById(profileId);
 		
