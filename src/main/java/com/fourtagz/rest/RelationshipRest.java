@@ -1,5 +1,6 @@
 package com.fourtagz.rest;
 
+import java.util.Date;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +39,7 @@ public class RelationshipRest {
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Relationship> create(@RequestBody Relationship relationship) {
 		relationship.setId(UUID.randomUUID().toString());
+		relationship.setBeepedDate(new Date());
 		Relationship r = relationshipBO.insert(relationship);
 		return new ResponseEntity<Relationship>(r, HttpStatus.CREATED);
 	}
