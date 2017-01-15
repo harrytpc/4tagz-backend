@@ -1,6 +1,7 @@
 package com.fourtagz.bo;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
@@ -20,12 +21,12 @@ public class ProfileBO {
 		return profileList;
 	}
 	
-	public Profile insert(Profile profile){
+	public Profile insert(Profile profile){		
 		profile = profileRepository.save(profile);
 		return profile;
 	}
 	
-	public Profile getDadosById(Long profileId){
+	public Profile getDadosById(String profileId){
 		Profile profile = profileRepository.findOne(profileId);
 		return profile;
 	}
@@ -36,7 +37,7 @@ public class ProfileBO {
 		return profile;
 	}
 	
-	public void deleteById(Long profileId){		
+	public void deleteById(String profileId){		
 		profileRepository.delete(profileId);		
 	}
 

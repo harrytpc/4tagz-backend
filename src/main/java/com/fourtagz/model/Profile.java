@@ -8,10 +8,12 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Profile {
 	
+
 	@Id
 	private String id;
 	
 	private String name;
+	private String profileName;
 	private String phone1;
 	private String phone2;
 	private String email;
@@ -33,6 +35,14 @@ public class Profile {
 
 	public String getName() {
 		return name;
+	}	
+	
+	public String getProfileName() {
+		return profileName;
+	}
+
+	public void setProfileName(String profileName) {
+		this.profileName = profileName;
 	}
 
 	public void setName(String name) {

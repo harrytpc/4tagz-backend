@@ -32,7 +32,6 @@ public class UserRest {
 	@Autowired
 	private RelationshipBO relationshipBO;
 	
-
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<User> get(@PathVariable("id") String userId) {
 		User user = userBO.getById(userId);
