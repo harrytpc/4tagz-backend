@@ -34,6 +34,10 @@ public class ProfileBO {
 		
 		profile = profileRepository.save(profile);					
 		return profile;
-	}	
+	}
+	
+	public void deleteById(Long profileId){
+		profileRepository.delete(profileId);		
+	}
 
 }

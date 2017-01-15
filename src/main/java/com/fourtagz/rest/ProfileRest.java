@@ -51,6 +51,15 @@ public class ProfileRest {
 		
 		Profile p = profileBO.update(profile);		
 		return new ResponseEntity<Profile>(p, HttpStatus.OK);				
-	}	
+	}
+	
+	//Remove perfil
+	@RequestMapping(value = "deletePerfil/{profileId}", method = RequestMethod.GET)
+	public ResponseEntity<Profile> delete(@PathVariable("profileId") Long profileId){
+		
+		profileBO.deleteById(profileId);
+		return new ResponseEntity<Profile>(HttpStatus.NO_CONTENT);
+	}
+	
 
 }
