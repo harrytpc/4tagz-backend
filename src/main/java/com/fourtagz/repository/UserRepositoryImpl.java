@@ -31,5 +31,25 @@ public class UserRepositoryImpl implements UserRepositoryCustom{
 		
 	    return (List<User>) query.getResultList();
 	}
+	
+	@Override
+	public List<User> findByEmail(String email) {
+		Map<String, Object> params = new HashMap<>();
+		
+		StringBuffer sb = new StringBuffer();
+		sb.append("SELECT u FROM User u");
+		sb.append(" where 1=1");
+		sb.append(" and u.email = :email ");
+
+		params.put("email", email);
+		
+		
+		Query query = em.createQuery(sb.toString());
+		for(Map.Entry<String, Object> entry : params.entrySet()) {
+			query.setParameter(entry.getKey(), entry.getValue());
+		}
+		
+	    return (List<User>) query.getResultList();
+	}
 
 }

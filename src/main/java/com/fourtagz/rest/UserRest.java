@@ -43,7 +43,7 @@ public class UserRest {
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public ResponseEntity<User> login(@RequestBody User user) {
 		// TODO validar se usuario e password estão OK
-		User u = userBO.getById(user.getId());
+		User u = userBO.getByEmail(user.getEmail());
 		
 		if(u == null){
 	    	System.out.println("User not found.");
