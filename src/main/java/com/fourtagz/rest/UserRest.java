@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fourtagz.bo.ProfileBO;
 import com.fourtagz.bo.UserBO;
-import com.fourtagz.model.Relationship;
 import com.fourtagz.model.User;
 
 @RestController
@@ -33,7 +32,7 @@ public class UserRest {
 	 * @param user object
 	 * @return user object with ID 
 	 */
-	@RequestMapping(value = "/create/", method = RequestMethod.POST)
+	@RequestMapping(value = "/create", method = RequestMethod.POST)
 	public ResponseEntity<User> create(@RequestBody User user) {
 		// TODO inserir usuario
 		User u = userBO.insert(user);
