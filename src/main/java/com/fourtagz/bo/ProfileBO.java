@@ -34,6 +34,6 @@ public class ProfileBO {
 		
 		profile = profileRepository.save(profile);					
 		return profile;
-	}
+	}	
 
 }

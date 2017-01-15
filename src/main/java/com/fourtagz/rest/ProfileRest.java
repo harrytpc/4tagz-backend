@@ -51,7 +51,6 @@ public class ProfileRest {
 		
 		Profile p = profileBO.update(profile);		
 		return new ResponseEntity<Profile>(p, HttpStatus.OK);				
-	}
-
+	}	
 
 }
