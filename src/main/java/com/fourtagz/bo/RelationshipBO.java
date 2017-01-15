@@ -29,20 +29,15 @@ public class RelationshipBO {
 	 * delete relationship
 	 * @param id
 	 */
-	public void deleteById(Long id){
+	public void deleteById(String id){
 		relationshipRepository.delete(id);
 	}
 	
-	public List<Relationship> example(){
-		List<Relationship> userList = relationshipRepository.example();
-		return userList;
-	}
-	
-	public List<Relationship> list(Long userId){
+	public List<Relationship> list(String userId){
 		List<Relationship> userList = relationshipRepository.list(userId);
 		return userList;
 	}
-	public Relationship findById(Long id ){
+	public Relationship findById(String id ){
 		Relationship relationship = relationshipRepository.findOne(id);
 		return relationship;
 	}

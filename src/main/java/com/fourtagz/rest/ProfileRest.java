@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fourtagz.bo.ProfileBO;
 import com.fourtagz.model.Profile;
-import com.fourtagz.model.Relationship;
 import com.fourtagz.model.User;
 
 @RestController
@@ -24,7 +23,7 @@ public class ProfileRest {
 	private ProfileBO profileBO;
 	
 	@RequestMapping(value = "/list/{userId}", method = RequestMethod.GET)
-	public ResponseEntity<List<Profile>> getUserProfiles(@PathVariable("userId") Long userId) {
+	public ResponseEntity<List<Profile>> getUserProfiles(@PathVariable("userId") String userId) {
 		List<Profile> profileList = profileBO.getById(userId);
 		return new ResponseEntity<List<Profile>>(profileList, HttpStatus.OK);		
 		
@@ -55,16 +54,9 @@ public class ProfileRest {
 	}
 	
 	//Remove perfil
-	@RequestMapping(value = "deletePerfil/{profileId}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "deletePerfil/{profileId}", method = RequestMethod.GET)
 	public ResponseEntity<Profile> delete(@PathVariable("profileId") Long profileId){
 		
-		Profile profile = profileBO.getDadosById(profileId);
-		
-		 if (profile == null) {
-	            System.out.println("Unable to delete. Profile with id " + profileId + " not found");
-	            return new ResponseEntity<Profile>(HttpStatus.OK);
-	        }
-		 
 		profileBO.deleteById(profileId);
 		return new ResponseEntity<Profile>(HttpStatus.NO_CONTENT);
 	}

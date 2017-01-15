@@ -1,6 +1,6 @@
 package com.fourtagz.rest;
 
-import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,11 +15,18 @@ import com.fourtagz.bo.RelationshipBO;
 import com.fourtagz.model.Relationship;
 
 @RestController
-@RequestMapping("relationship")
+@RequestMapping("relationships")
 public class RelationshipRest {
 	
 	@Autowired
 	private RelationshipBO relationshipBO;
+	
+	
+	@RequestMapping(value = "/{id}",method = RequestMethod.GET)
+	public ResponseEntity<Relationship> get(@RequestBody String id) {		
+		Relationship r = relationshipBO.findById(id);
+		return new ResponseEntity<Relationship>(r, HttpStatus.CREATED);
+	}
 	
 	/**
 	 * 
@@ -28,19 +35,21 @@ public class RelationshipRest {
 	 * @param user object
 	 * @return user object with ID 
 	 */
-	@RequestMapping(value = "/create/", method = RequestMethod.POST)
+	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Relationship> create(@RequestBody Relationship relationship) {
+		relationship.setId(UUID.randomUUID().toString());
 		Relationship r = relationshipBO.insert(relationship);
 		return new ResponseEntity<Relationship>(r, HttpStatus.CREATED);
 	}
+	
 	
 	/***
 	 * deletes the relationship
 	 * @param id
 	 * @return
 	 */
-	@RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
-	public ResponseEntity<Relationship> delete(@PathVariable("id") long id) {
+	@RequestMapping(value = "{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<Relationship> delete(@PathVariable("id") String id) {
 				
         Relationship relationship = relationshipBO.findById(id);
         
@@ -52,12 +61,5 @@ public class RelationshipRest {
         relationshipBO.deleteById(id);        
         return new ResponseEntity<Relationship>(HttpStatus.NO_CONTENT);
         
-	}
-
-	@RequestMapping(value = "/list/{userId}", method = RequestMethod.GET)
-	public ResponseEntity<List<Relationship>> getUserProfiles(@PathVariable("userId") Long userId) {
-		List<Relationship> relationList = relationshipBO.list(userId);
-		return new ResponseEntity<List<Relationship>>(relationList, HttpStatus.OK);	
-	}
-	
+	}	
 }

@@ -15,7 +15,7 @@ public class ProfileBO {
 	@Autowired
 	private ProfileRepository profileRepository;
 	
-	public List<Profile> getById(Long userId){
+	public List<Profile> getById(String userId){
 		List<Profile> profileList = profileRepository.example();
 		return profileList;
 	}

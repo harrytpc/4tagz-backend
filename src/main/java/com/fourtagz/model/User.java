@@ -2,9 +2,8 @@ package com.fourtagz.model;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Transient;
 
@@ -12,19 +11,19 @@ import javax.persistence.Transient;
 @Entity
 public class User {
 
-	@Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-	private Long id;	
+	@Id    
+	private String id;	
+	@Column(unique=true)
 	private String email;
 	private String password;
 	
 	@Transient
-	private List<Profile> profile;
+	private List<Profile> profile;	
 	
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	public String getEmail() {

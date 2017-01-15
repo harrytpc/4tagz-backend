@@ -27,7 +27,7 @@ public class UserBO {
 		return user;
 	}
 	
-	public User getById(Long userId){
+	public User getById(String userId){
 		User user = userRepository.findOne(userId);
 		return user;
 	}
@@ -44,11 +44,6 @@ public class UserBO {
 		}
 		
 		return null;
-	}
-	
-	public List<User> example(){
-		List<User> userList = userRepository.example();
-		return userList;
-	}
+	}	
 
 }

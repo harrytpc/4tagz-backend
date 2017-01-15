@@ -18,24 +18,7 @@ public class RelationshipRepositoryImpl
     private EntityManager em;
 	
 	@Override
-	public List<Relationship> example() {
-		Map<String, Object> params = new HashMap<>();
-		
-		StringBuffer sb = new StringBuffer();
-		sb.append("SELECT u FROM Relationship u");
-		sb.append(" where 1=1");
-		
-		
-		Query query = em.createQuery(sb.toString());
-		for(Map.Entry<String, Object> entry : params.entrySet()) {
-			query.setParameter(entry.getKey(), entry.getValue());
-		}
-		
-	    return (List<Relationship>) query.getResultList();
-	}
-	
-	@Override
-	public List<Relationship> list(Long idUsuario) {
+	public List<Relationship> list(String idUsuario) {
 		Map<String, Object> params = new HashMap<>();
 		
 		StringBuffer sb = new StringBuffer();
