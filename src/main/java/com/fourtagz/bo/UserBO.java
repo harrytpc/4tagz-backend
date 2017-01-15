@@ -32,6 +32,20 @@ public class UserBO {
 		return user;
 	}
 	
+	public User getByEmail(String email){
+		List<User> userList = userRepository.findByEmail(email);
+		
+		if(userList == null){
+			return null;
+		}
+		
+		if(userList.size() == 1){
+			return userList.get(0);
+		}
+		
+		return null;
+	}
+	
 	public List<User> example(){
 		List<User> userList = userRepository.example();
 		return userList;
