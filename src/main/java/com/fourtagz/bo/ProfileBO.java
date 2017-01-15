@@ -36,7 +36,7 @@ public class ProfileBO {
 		return profile;
 	}
 	
-	public void deleteById(Long profileId){
+	public void deleteById(Long profileId){		
 		profileRepository.delete(profileId);		
 	}
 
