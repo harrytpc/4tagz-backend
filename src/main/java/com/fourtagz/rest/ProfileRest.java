@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fourtagz.bo.ProfileBO;
 import com.fourtagz.model.Profile;
+import com.fourtagz.model.Relationship;
 import com.fourtagz.model.User;
 
 @RestController
@@ -22,7 +23,7 @@ public class ProfileRest {
 	@Autowired
 	private ProfileBO profileBO;
 	
-	@RequestMapping(value = "/{userId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/list/{userId}", method = RequestMethod.GET)
 	public ResponseEntity<List<Profile>> getUserProfiles(@PathVariable("userId") Long userId) {
 		List<Profile> profileList = profileBO.getById(userId);
 		return new ResponseEntity<List<Profile>>(profileList, HttpStatus.OK);		
@@ -38,7 +39,7 @@ public class ProfileRest {
 	}
 	
 	//Recupera dados do perfil
-	@RequestMapping(value = "{profileId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/unique/{profileId}", method = RequestMethod.GET)
 	public ResponseEntity<Profile> getUserProfile(@PathVariable("profileId") Long profileId){
 		
 		Profile profile = profileBO.getDadosById(profileId);
@@ -52,6 +53,21 @@ public class ProfileRest {
 		Profile p = profileBO.update(profile);		
 		return new ResponseEntity<Profile>(p, HttpStatus.OK);				
 	}
-
+	
+	//Remove perfil
+	@RequestMapping(value = "deletePerfil/{profileId}", method = RequestMethod.DELETE)
+	public ResponseEntity<Profile> delete(@PathVariable("profileId") Long profileId){
+		
+		Profile profile = profileBO.getDadosById(profileId);
+		
+		 if (profile == null) {
+	            System.out.println("Unable to delete. Profile with id " + profileId + " not found");
+	            return new ResponseEntity<Profile>(HttpStatus.OK);
+	        }
+		 
+		profileBO.deleteById(profileId);
+		return new ResponseEntity<Profile>(HttpStatus.NO_CONTENT);
+	}
+	
 
 }
