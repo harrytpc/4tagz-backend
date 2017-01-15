@@ -46,7 +46,7 @@ public class RelationshipRest {
         
         if (relationship == null) {
             System.out.println("Unable to delete. Relationship with id " + id + " not found");
-            return new ResponseEntity<Relationship>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<Relationship>(HttpStatus.OK);
         }
  
         relationshipBO.deleteById(id);        

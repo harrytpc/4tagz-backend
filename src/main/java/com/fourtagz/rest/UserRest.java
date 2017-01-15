@@ -47,12 +47,12 @@ public class UserRest {
 		
 		if(u == null){
 	    	System.out.println("User not found.");
-	    	return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
+	    	return new ResponseEntity<User>(HttpStatus.OK);
 		}
 		
 		if(!u.getPassword().equals(user.getPassword())){
 	    	System.out.println("Invalid password.");
-	    	return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
+	    	return new ResponseEntity<User>(HttpStatus.OK);
 		}
 		
 		return new ResponseEntity<User>(u, HttpStatus.CREATED);
