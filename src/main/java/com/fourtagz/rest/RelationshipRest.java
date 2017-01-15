@@ -23,9 +23,9 @@ public class RelationshipRest {
 	
 	
 	@RequestMapping(value = "/{id}",method = RequestMethod.GET)
-	public ResponseEntity<Relationship> get(@RequestBody String id) {		
+	public ResponseEntity<Relationship> get(@PathVariable("id") String id) {		
 		Relationship r = relationshipBO.findById(id);
-		return new ResponseEntity<Relationship>(r, HttpStatus.CREATED);
+		return new ResponseEntity<Relationship>(r, HttpStatus.OK);
 	}
 	
 	/**
